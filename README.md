@@ -15,34 +15,42 @@ Ensuite vous allez créer un script shell qui récupère tous les containers doc
 
 **docker-compose -d build**
 
-docker images
+**docker images**
 
-**tp-01_containeraa                  latest    952cfe8c34be**   
-**tp-01_containerbb                  latest    952cfe8c34be**   
+tp-01_containeraa                  latest    952cfe8c34be**   
+tp-01_containerbb                  latest    952cfe8c34be**   
 
 **docker ps**
+
 CONTAINER ID   IMAGE               COMMAND                  CREATED             STATUS             PORTS            NAMES
 361bf0edf8c0   tp-01_containeraa   "/docker-entrypoint.…"   About an hour ago   Up About an hour   22/tcp, 80/tcp   container-aa
 205447a82465   tp-01_containerbb   "/docker-entrypoint.…"   About an hour ago   Up About an hour   22/tcp, 80/tcp   container-bb
 
+
 **docker exec -it 361bf0edf8c0 bash**
+
 Afin de vérifier la copie effective de ma clé publique (key.pub) dans le fichier authorized_keys 
 
 **sshuser@361bf0edf8c0: Connexion réussie !🙂**
 
 **cd /home/sshuser/.ssh**
 **ls -l**
-J’obtiens, **-rw-r--r-- 1 root root 573 Apr 27 14:40 authorized_keys**
+
+J’obtiens, 
+**-rw-r--r-- 1 root root 573 Apr 27 14:40 authorized_keys**
 
 Ce qui signifie que sshuser ne peut que lire car c’est le root qui est propriétaire.
-Je change donc le propriétaire du groupe root par sshuser afin de pouvoir écrire également avec l commande suivante:
+Je change donc le propriétaire du groupe root par sshuser afin de pouvoir écrire également avec la commande suivante:
 **sudo chown -R sshuser:sshgroup /home/sshuser/.ssh**
 
 **docker inspect 361bf0edf8c0** 
+
 Cette commande me permet de récupérer l’adresse IP de mon container.
 
 **ssh -i public-key-2 Lina2@192.168.48.3**
+
 Cette commande me permet de me connecter  en ssh à mon container2
 
 Et bimmmm…
+
 **sshuser@361bf0edf8c0:~$ Connexion réussie !!!!! 😀 👏**
