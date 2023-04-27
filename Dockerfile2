@@ -1,0 +1,10 @@
+FROM marwaney/ssh-server 
+
+#RUN apt-get update -y
+
+USER sshuser
+
+COPY key.pub /home/sshuser/.ssh/authorized_keys
+
+#on demarre notre service ssh et on précise le "sudo" parceq plus haut ns avons dit que le seul utilisateur était userssh or lors du démarrage, certaines commandes doivent etre exécutée en sudo
+CMD ["sudo""/usr/sbin/sshd","-D"] 
